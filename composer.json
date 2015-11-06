@@ -1,0 +1,14 @@
+{
+    "name": "jcatibog/php-shopify-api",
+    "description": "Shopify API wrapper",
+    "type": "library",
+    "require": {
+        "zendframework/zend-http": "^2.5"
+    },
+    "authors": [
+        {
+            "name": "Timothy Catibog",
+            "email": "timothycatibog@gmail.com"
+        }
+    ]
+}
