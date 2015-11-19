@@ -20,7 +20,6 @@ abstract class Resource
     {
         if ($config instanceof \Zend\Config\Config) {
             $config = $config->toArray();
-
         } elseif (!is_array($config)) {
             throw new \InvalidArgumentException('Array or Zend_Config object expected, got '. gettype($config));
         }
@@ -34,20 +33,20 @@ abstract class Resource
 
     protected function getClient()
     {
-        if (!$this->_config['client'] instanceof Client) {
+        if (!$this->config['client'] instanceof Client) {
             throw new \Exception('Shopify\Client object expected, got '. gettype($this->_config['client']));
         }
 
-        return $this->_config['client'];
+        return $this->config['client'];
     }
 
     protected function getUrl()
     {
-        if ($this->_config['url'] == '') {
+        if ($this->config['url'] == '') {
             throw new \Exception('Url is empty.');
         }
 
-        return $this->_config['url'];
+        return $this->config['url'];
     }
 
     protected function flattenOptions($options = null)
@@ -56,15 +55,15 @@ abstract class Resource
             throw new \InvalidArgumentException('Array expected, got '. gettype($options));
         }
 
-        $_options = array();
+        $flatOptions = array();
         foreach ($options as $option => $value) {
             if (is_array($value)) {
-                $value = implode(',', $value);
+                $value = implode(',', array_map('trim', $value));
             }
-            $_options[] = $option .'='. $value;
+            $flatOptions[] = $option .'='. $value;
         }
 
-        return implode('&', $_options);
+        return implode('&', $flatOptions);
     }
 
     abstract public function get($options = null);

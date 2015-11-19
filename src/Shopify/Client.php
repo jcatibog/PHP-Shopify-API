@@ -31,23 +31,23 @@ class Client
     public function request($request = null)
     {
         if (is_null($request)) {
-            throw new \InvalidArgumentException('You must specify a request url.');
+            throw new \InvalidArgumentException('You must specify a request url or object.');
         } elseif (!is_string($request) || !($request instanceof \Zend\Http\Request)) {
             throw new \InvalidArgumentException('String or \\Zend\\Http\\Request object expected, got ' . gettype($request));
         }
 
-        $this->_getClient()->setUri($this->_getUrl() . $request);
+        $this->getClient()->setUri($this->getUrl() . $request);
 
-        return json_decode($this->_getClient()->getResponse()->getBody());
+        return json_decode($this->getClient()->getResponse()->getBody());
     }
 
     private function getClient()
     {
         if (!is_object($this->client) || !($this->client instanceof \Zend\Http\Client)) {
-            $this->_client = new \Zend\Http\Client();
+            $this->client = new \Zend\Http\Client();
         }
 
-        return $this->_client;
+        return $this->client;
     }
 
     private function getUrl()

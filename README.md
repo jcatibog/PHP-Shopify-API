@@ -6,33 +6,33 @@ Basic Example
 -----
 ```php
 <?php
-        define('API_KEY', 'xxxxx');
-        define('SECRET', 'xxxxx');
+    define('API_KEY', 'xxxxx');
+    define('SECRET', 'xxxxx');
 
-        require_once('Zend/Loader/StandardAutoloader.php');
+    require_once('Zend/Loader/StandardAutoloader.php');
 
-        $loader = new \Zend\Loader\StandardAutoloader();
-        $loader->registerNamespaces(array(
-                'Zend' => __DIR__ .'/library/Zend',
-                'Shopify' => __DIR__ .'/library/Shopify'
-        ));
-        $loader->register();
+    $loader = new \Zend\Loader\StandardAutoloader();
+    $loader->registerNamespaces(array(
+        'Zend' => __DIR__ .'/library/Zend',
+        'Shopify' => __DIR__ .'/library/Shopify'
+    ));
+    $loader->register();
 
-        $client = new \Shopify\Client(array(
-                'shop'    => $_GET['shop'],
-                'api_key' => API_KEY,
-                'secret'  => SECRET,
-                'token'   => $_GET['t']
-        ));
+    $client = new \Shopify\Client(array(
+        'shop'    => $_GET['shop'],
+        'api_key' => API_KEY,
+        'secret'  => SECRET,
+        'token'   => $_GET['t']
+    ));
 
-        $ShopifyProduct = new \Shopify\Resource\Product(array(
-                'client' => $client
-        ));
+    $ShopifyProduct = new \Shopify\Resource\Product(array(
+        'client' => $client
+    ));
 
-        $products = $ShopifyProduct->getAll(array(
-                'fields'=> array('id'),
-                'collection_id' => '3782202'
-        ));
+    $products = $ShopifyProduct->getAll(array(
+        'fields'=> array('id'),
+        'collection_id' => '3782202'
+    ));
 
-        print_r($products);
+    print_r($products);
 ```
